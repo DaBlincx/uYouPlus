@@ -119,7 +119,7 @@ jobs:
         id: prepare_youtube
         run: |
           wget "$YOUTUBE_URL" --no-verbose -O main/YouTube.ipa
-          wget "$UYOU_URL" --no-verbose -P main/Tweaks/uYou/
+          wget "$UYOU_URL" --no-verbose -O "main/Tweaks/uYou/com.miro.uyou_${UYOU_VERSION}_iphoneos-arm.deb"
           pwd
           ls -lah main/Tweaks/uYou/
           echo "uyou deb downloaded"
@@ -135,6 +135,7 @@ jobs:
           THEOS: ${{ github.workspace }}/theos
           YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
           UYOU_URL: ${{ inputs.uyou_deb_url }}
+          UYOU_VERSION: ${{ inputs.uyou_version }}
 
       - name: Fix compiling & Build Package
         id: build_package
