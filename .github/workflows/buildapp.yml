@@ -119,7 +119,7 @@ jobs:
         id: prepare_youtube
         run: |
           wget "$YOUTUBE_URL" --no-verbose -O main/YouTube.ipa
-          wget "$UYOU_URL" --no-verbose -O main/com.miro.uyou.deb
+          wget "$UYOU_URL" --no-verbose -P main/Tweaks/uYou/
           echo "pwd: ${pwd}"
           sudo find / -name '*com.miro.uyou*'
           echo "uyou deb downloaded"
