@@ -120,8 +120,8 @@ jobs:
         run: |
           wget "$YOUTUBE_URL" --no-verbose -O main/YouTube.ipa
           wget "$UYOU_URL" --no-verbose -P main/Tweaks/uYou/
-          echo "pwd: ${pwd}"
-          sudo find / -name '*com.miro.uyou*'
+          pwd
+          ls -lah main/Tweaks/uYou/
           echo "uyou deb downloaded"
           cd ${{ github.workspace }}/main
           mv YouTube.ipa YouTube.zip
