@@ -16,6 +16,11 @@ on:
         default: "https://cdn.iloveblahaj.org/ipa/com.google.ios.youtube_XXXX.ipa"
         required: true
         type: string
+      uyou_deb_url:
+        description: "Direct URL to the uYou deb file (without cloudflare bot protection)"
+        default: "https://cdn.iloveblahaj.org/deb/com.miro.uyou_3.0.4_iphoneos-arm.deb"
+        required: true
+        type: string
       bundle_id:
         description: "Modify the bundle ID. Not recommended"
         default: "com.google.ios.youtube"
@@ -114,6 +119,10 @@ jobs:
         id: prepare_youtube
         run: |
           wget "$YOUTUBE_URL" --no-verbose -O main/YouTube.ipa
+          wget "$UYOU_URL" --no-verbose -O main/com.miro.uyou.deb
+          echo "pwd: ${pwd}"
+          sudo find / -name '*com.miro.uyou*'
+          echo "uyou deb downloaded"
           cd ${{ github.workspace }}/main
           mv YouTube.ipa YouTube.zip
           unzip -q YouTube.zip
@@ -125,6 +134,7 @@ jobs:
         env:
           THEOS: ${{ github.workspace }}/theos
           YOUTUBE_URL: ${{ inputs.decrypted_youtube_url }}
+          UYOU_URL: ${{ inputs.uyou_deb_url }}
 
       - name: Fix compiling & Build Package
         id: build_package
